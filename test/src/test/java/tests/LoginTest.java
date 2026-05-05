@@ -10,7 +10,7 @@ import pages.LoginPage;
 import pages.HomePage;
 import utils.ConfigReader;
 
-public class LoginTest extends TestBase {
+public class LoginTest extends BaseTest {
 
     @BeforeMethod
     public void setup() throws MalformedURLException {
@@ -22,7 +22,9 @@ public class LoginTest extends TestBase {
     public void testSuccessfulLogin() {
         HomePage homePage = new HomePage(this.driver);
         Assert.assertTrue(homePage.getWelcomeText().contains("Welcome to our store."));
+        Assert.assertEquals(homePage.getPageTitle(), "Shop");
         LoginPage loginPage = homePage.clickLoginButton();
+        Assert.assertEquals(loginPage.getPageTitle(), "Shop. Login");
         homePage = loginPage.login(ConfigReader.get("username"), ConfigReader.get("password"));
         Assert.assertTrue(homePage.isUserLoggedIn());
     }

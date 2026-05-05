@@ -3,7 +3,7 @@ package utils;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
-import tests.TestBase;
+import tests.BaseTest;
 
 import org.openqa.selenium.*;
 
@@ -17,7 +17,7 @@ public class ScreenshotListener extends TestListenerAdapter {
     @Override
     public void onTestFailure(ITestResult result) {
         Object currentClass = result.getInstance();
-        WebDriver driver = ((TestBase)currentClass).getDriver();
+        WebDriver driver = ((BaseTest)currentClass).getDriver();
 
         try {
             Path dir = Paths.get("screenshots");

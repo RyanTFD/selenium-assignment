@@ -11,7 +11,7 @@ import utils.ConfigReader;
 import utils.ScreenshotListener;
 
 @Listeners(ScreenshotListener.class)
-public class TestBase {
+public class BaseTest {
     protected WebDriver driver;
 
     protected Capabilities createCapabilities() {

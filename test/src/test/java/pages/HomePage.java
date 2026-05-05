@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import utils.ConfigReader;
 
-public class HomePage extends PageBase {
+public class HomePage extends BasePage {
 
     private final By welcomeLocator = By.xpath("//h1[contains(@class, 'h2')]");
     private final By loginLocator = By.xpath("//div[@class='dropdown']//a[contains(@href,'login')]");

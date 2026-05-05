@@ -8,11 +8,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PageBase {
+public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-    public PageBase(WebDriver driver) {
+    public BasePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 10);
     }
@@ -25,5 +25,9 @@ public class PageBase {
     protected boolean isElementPresent(By locator) {
         List<WebElement> elements = driver.findElements(locator);
         return !elements.isEmpty();
+    }
+
+    public String getPageTitle() {
+        return driver.getTitle();
     }
 }
