@@ -1,6 +1,10 @@
+package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import utils.ConfigReader;
 
 public class MainPage extends PageBase {
 
@@ -8,7 +12,7 @@ public class MainPage extends PageBase {
 
     public MainPage(WebDriver driver) {
         super(driver);
-        this.driver.get("https://bearstore-testsite.smartbear.com/");
+        this.driver.get(ConfigReader.get("baseUrl"));
     }
 
     public String getWelcomeText() {

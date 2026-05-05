@@ -1,3 +1,5 @@
+package tests;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import org.junit.*;
@@ -6,6 +8,7 @@ import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.URL;
 import java.net.MalformedURLException;
+import pages.MainPage;
 
 public class DemoTest {
     private WebDriver driver;
