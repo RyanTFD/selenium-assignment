@@ -2,33 +2,43 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import utils.ConfigReader;
 
 public class HomePage extends BasePage {
 
-    private final By welcomeLocator = By.xpath("//h1[contains(@class, 'h2')]");
     private final By loginLocator = By.xpath("//div[@class='dropdown']//a[contains(@href,'login')]");
     private final By customerInfoLocator = By.xpath("//div[@class='dropdown']//a[contains(@href,'/customer/info') and contains(@class, 'menubar-link')]");
+    private final By logoutLocator = By.xpath("//a[contains(@href,'/logout')]");
 
     public HomePage(WebDriver driver) {
         super(driver);
+    }
+    
+    public void open() {
         this.driver.get(ConfigReader.get("baseUrl"));
     }
 
-    public String getWelcomeText() {
-        WebElement welcomeElement = waitVisibilityAndFindElement(welcomeLocator);
-        return welcomeElement.getText();
-    }
-
-    public LoginPage clickLoginButton() {
-        WebElement loginElement = waitVisibilityAndFindElement(loginLocator);
-        loginElement.click();
+    public LoginPage clickLogin() {
+        waitVisibilityAndClickElement(loginLocator);
         return new LoginPage(driver);
     }
     
     public boolean isUserLoggedIn() {
         return isElementPresent(customerInfoLocator);
+    }
+
+    public void openUserMenu() {
+        waitVisibilityAndClickElement(customerInfoLocator);
+    }
+
+    public void clickLogout() {
+        waitVisibilityAndClickElement(logoutLocator);
+    }
+
+    public HomePage logout() {
+        openUserMenu();
+        clickLogout();
+        return new HomePage(this.driver);
     }
 }

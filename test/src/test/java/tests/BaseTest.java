@@ -7,6 +7,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Listeners;
 
+import pages.HomePage;
+import pages.LoginPage;
 import utils.ConfigReader;
 import utils.ScreenshotListener;
 
@@ -49,6 +51,18 @@ public class BaseTest {
         }
     }
     
+    protected HomePage loginAsValidUser() {
+        HomePage homePage = new HomePage(this.driver);
+        homePage.open();
+
+        LoginPage loginPage = homePage.clickLogin();
+
+        loginPage.typeUsername(ConfigReader.get("username"))
+                 .typePassword(ConfigReader.get("password"))
+                 .submit();
+        return new HomePage(this.driver);
+    }
+
     @AfterMethod
     public void close() {
         if (driver != null) {

@@ -8,7 +8,6 @@ import java.net.MalformedURLException;
 
 import pages.LoginPage;
 import pages.HomePage;
-import utils.ConfigReader;
 
 public class LoginTest extends BaseTest {
 
@@ -19,20 +18,40 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void testSuccessfulLogin() {
-        HomePage homePage = new HomePage(this.driver);
-        Assert.assertTrue(homePage.getWelcomeText().contains("Welcome to our store."));
-        Assert.assertEquals(homePage.getPageTitle(), "Shop");
-        LoginPage loginPage = homePage.clickLoginButton();
+    public void loginShouldHaveCorrectTitle() {
+        HomePage homePage = new HomePage(driver);
+        homePage.open();
+
+        LoginPage loginPage = homePage.clickLogin();
+
         Assert.assertEquals(loginPage.getPageTitle(), "Shop. Login");
-        homePage = loginPage.login(ConfigReader.get("username"), ConfigReader.get("password"));
-        Assert.assertTrue(homePage.isUserLoggedIn());
     }
 
     @Test
-    public void testScreenshot() {
-        HomePage homePage = new HomePage(this.driver);
-        Assert.assertTrue(homePage.getWelcomeText().contains("Welcome to our store."));
-        Assert.fail();
+    public void userCannotLoginWithInvalidCredentials() {
+        HomePage homePage = new HomePage(driver);
+        homePage.open();
+
+        LoginPage loginPage = homePage.clickLogin();
+
+        loginPage.typeUsername("invalid")
+                 .typePassword("invalid")
+                 .submit();
+
+        Assert.assertTrue(loginPage.isErrorDisplayed());
+    }
+
+    @Test
+    public void userCanLoginSuccessfully() {
+        HomePage loggedInHomePage = loginAsValidUser();
+
+        Assert.assertTrue(loggedInHomePage.isUserLoggedIn());
+    }
+
+    @Test(dependsOnMethods = { "userCanLoginSuccessfully" })
+    public void userCanLogoutSuccessfully() {
+        HomePage homePage = loginAsValidUser().logout();
+
+        Assert.assertFalse(homePage.isUserLoggedIn());
     }
 }

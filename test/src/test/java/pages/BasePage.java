@@ -27,6 +27,11 @@ public class BasePage {
         return !elements.isEmpty();
     }
 
+    protected void waitVisibilityAndClickElement(By locator) {
+        WebElement element = waitVisibilityAndFindElement(locator);
+        element.click();
+    }
+
     public String getPageTitle() {
         return driver.getTitle();
     }
