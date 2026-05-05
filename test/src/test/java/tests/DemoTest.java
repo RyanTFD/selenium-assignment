@@ -5,18 +5,31 @@ import static org.junit.Assert.assertFalse;
 import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
+import org.openqa.selenium.firefox.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.URL;
 import java.net.MalformedURLException;
 import pages.MainPage;
+import utils.ConfigReader;
 
 public class DemoTest {
     private WebDriver driver;
 
     @Before
     public void setup() throws MalformedURLException {
-        ChromeOptions options = new ChromeOptions();
-        driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
+
+        switch (ConfigReader.get("browser")) {
+            case "chrome":
+                ChromeOptions chromeOptions = new ChromeOptions();
+                driver = new RemoteWebDriver(new URL("http://selenium-hub:4444"), chromeOptions);
+                break;
+            case "firefox":
+            default:
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                driver = new RemoteWebDriver(new URL("http://selenium-hub:4444"), firefoxOptions);
+                break;
+        }
+
         driver.manage().window().maximize();
     }
 
