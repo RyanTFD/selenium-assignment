@@ -18,18 +18,29 @@ public class DemoTest {
     @Before
     public void setup() throws MalformedURLException {
 
-        switch (ConfigReader.get("browser")) {
-            case "chrome":
-                ChromeOptions chromeOptions = new ChromeOptions();
-                driver = new RemoteWebDriver(new URL("http://selenium-hub:4444"), chromeOptions);
-                break;
-            case "firefox":
-            default:
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                driver = new RemoteWebDriver(new URL("http://selenium-hub:4444"), firefoxOptions);
-                break;
-        }
+        Capabilities caps;
+        boolean headless = Boolean.parseBoolean(ConfigReader.get("headless"));
 
+        switch (ConfigReader.get("browser")) {
+        case "chrome":
+            ChromeOptions chromeOptions = new ChromeOptions();
+            if (headless) {
+                chromeOptions.addArguments("--headless=new");
+            }
+            caps = chromeOptions;
+            break;
+
+        case "firefox":
+        default:
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            if (headless) {
+                firefoxOptions.addArguments("-headless");
+            }
+            caps = firefoxOptions;
+            break;
+        }
+            
+        driver = new RemoteWebDriver(new URL("http://selenium-hub:4444"), caps);
         driver.manage().window().maximize();
     }
 
