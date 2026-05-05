@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,5 +20,10 @@ public class PageBase {
     protected WebElement waitVisibilityAndFindElement(By locator) {
         this.wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return this.driver.findElement(locator);
+    }
+
+    protected boolean isElementPresent(By locator) {
+        List<WebElement> elements = driver.findElements(locator);
+        return !elements.isEmpty();
     }
 }
