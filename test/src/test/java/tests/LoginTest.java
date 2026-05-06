@@ -20,8 +20,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void userCannotLoginWithRandomUsernameAndPassword() {
-        HomePage homePage = new HomePage(this.driver);
-        homePage.open();
+        HomePage homePage = new HomePage(this.driver).open();
 
         LoginPage loginPage = homePage.clickLogin();
 
@@ -37,8 +36,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void userCannotLoginWithRandomEmailAndPassword() {
-        HomePage homePage = new HomePage(this.driver);
-        homePage.open();
+        HomePage homePage = new HomePage(this.driver).open();
 
         LoginPage loginPage = homePage.clickLogin();
 
@@ -54,8 +52,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void loginShouldHaveCorrectTitle() {
-        HomePage homePage = new HomePage(this.driver);
-        homePage.open();
+        HomePage homePage = new HomePage(this.driver).open();
 
         LoginPage loginPage = homePage.clickLogin();
 
@@ -64,8 +61,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void userCannotLoginWithInvalidCredentials() {
-        HomePage homePage = new HomePage(this.driver);
-        homePage.open();
+        HomePage homePage = new HomePage(this.driver).open();
 
         LoginPage loginPage = homePage.clickLogin();
 

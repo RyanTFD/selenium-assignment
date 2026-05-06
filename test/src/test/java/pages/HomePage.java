@@ -19,9 +19,9 @@ public class HomePage extends BasePage {
         super(driver);
     }
     
-    public void open() {
+    public HomePage open() {
         this.driver.get(ConfigReader.get("baseUrl"));
-        waitUntilLoaded();
+        return waitUntilLoaded();
     }
 
     public HomePage waitUntilLoaded() {

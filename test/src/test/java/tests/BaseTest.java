@@ -52,8 +52,7 @@ public class BaseTest {
     }
     
     protected HomePage loginAsValidUser() {
-        HomePage homePage = new HomePage(this.driver);
-        homePage.open();
+        HomePage homePage = new HomePage(this.driver).open();
 
         LoginPage loginPage = homePage.clickLogin();
 
