@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -30,6 +31,12 @@ public class BasePage {
     protected void waitVisibilityAndClickElement(By locator) {
         WebElement element = waitVisibilityAndFindElement(locator);
         element.click();
+    }
+
+    protected void hover(By locator) {
+        WebElement element = waitVisibilityAndFindElement(locator);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
     }
 
     public String getPageTitle() {

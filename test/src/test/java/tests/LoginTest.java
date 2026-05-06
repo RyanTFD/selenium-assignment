@@ -19,7 +19,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void loginShouldHaveCorrectTitle() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(this.driver);
         homePage.open();
 
         LoginPage loginPage = homePage.clickLogin();
@@ -29,7 +29,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void userCannotLoginWithInvalidCredentials() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(this.driver);
         homePage.open();
 
         LoginPage loginPage = homePage.clickLogin();
