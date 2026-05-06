@@ -7,6 +7,7 @@ import java.net.URL;
 import java.net.MalformedURLException;
 
 import pages.LoginPage;
+import utils.RandomDataGenerator;
 import pages.HomePage;
 
 public class LoginTest extends BaseTest {
@@ -15,6 +16,40 @@ public class LoginTest extends BaseTest {
     public void setup() throws MalformedURLException {
         this.driver = new RemoteWebDriver(new URL("http://selenium-hub:4444"), createCapabilities());
         this.driver.manage().window().maximize();
+    }
+
+    @Test
+    public void userCannotLoginWithRandomUsernameAndPassword() {
+        HomePage homePage = new HomePage(this.driver);
+        homePage.open();
+
+        LoginPage loginPage = homePage.clickLogin();
+
+        String username = RandomDataGenerator.randomUsername();
+        String password = RandomDataGenerator.randomPassword();
+
+        loginPage.typeUsername(username)
+                 .typePassword(password)
+                 .submit();
+
+        Assert.assertTrue(loginPage.isErrorDisplayed());
+    }
+
+    @Test
+    public void userCannotLoginWithRandomEmailAndPassword() {
+        HomePage homePage = new HomePage(this.driver);
+        homePage.open();
+
+        LoginPage loginPage = homePage.clickLogin();
+
+        String username = RandomDataGenerator.randomEmail();
+        String password = RandomDataGenerator.randomPassword();
+
+        loginPage.typeUsername(username)
+                 .typePassword(password)
+                 .submit();
+
+        Assert.assertTrue(loginPage.isErrorDisplayed());
     }
 
     @Test
