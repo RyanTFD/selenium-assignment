@@ -21,8 +21,8 @@ services:
       - LANG=C.UTF-8
       - LC_ALL=C.UTF-8
       - SE_VNC_NO_PASSWORD=1
-      - SE_SCREEN_WIDTH=1800
-      - SE_SCREEN_HEIGHT=960
+      - SE_SCREEN_WIDTH=1920
+      - SE_SCREEN_HEIGHT=1080
       - SE_NODE_MAX_SESSIONS=5
       - SE_NODE_OVERRIDE_MAX_SESSIONS=true
 
@@ -40,8 +40,8 @@ services:
       - LANG=C.UTF-8
       - LC_ALL=C.UTF-8
       - SE_VNC_NO_PASSWORD=1
-      - SE_SCREEN_WIDTH=1800
-      - SE_SCREEN_HEIGHT=960
+      - SE_SCREEN_WIDTH=1920
+      - SE_SCREEN_HEIGHT=1080
       - SE_NODE_MAX_SESSIONS=5
       - SE_NODE_OVERRIDE_MAX_SESSIONS=true
       

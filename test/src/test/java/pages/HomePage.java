@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -41,7 +42,12 @@ public class HomePage extends BasePage {
     }
     
     public boolean isUserLoggedIn() {
-        return isElementPresent(customerInfoLocator);
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(customerInfoLocator));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 
     public void openUserMenu() {

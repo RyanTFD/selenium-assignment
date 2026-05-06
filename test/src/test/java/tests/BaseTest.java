@@ -31,6 +31,8 @@ public class BaseTest {
 
                 if (headless) {
                     chromeOptions.addArguments("--headless=new");
+                    //https://stackoverflow.com/questions/75439784/chrome-headless-new-mode-does-not-allow-to-apply-window-size-option
+                    chromeOptions.addArguments("--force-device-scale-factor=0.75");
                 }
 
                 return chromeOptions;
