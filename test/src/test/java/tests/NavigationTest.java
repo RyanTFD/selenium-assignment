@@ -43,7 +43,7 @@ public class NavigationTest extends BaseTest {
                 
         FurniturePage furniturePage = homePage.clickFurnitureMenu();
         
-        Assert.assertTrue(furniturePage.getPageTitle().contains("Furniture"));
+        Assert.assertEquals(furniturePage.getPageTitle(), "Shop. Furniture");
     }
 
     @Test
@@ -56,5 +56,21 @@ public class NavigationTest extends BaseTest {
         furniturePage.clickPriceButton();
 
         Assert.assertTrue(furniturePage.isPriceButtonSelected());
+    }
+
+    @Test
+    public void browserBackAndForwardShouldNavigateBetweenPagesCorrectly() {
+        HomePage homePage = new HomePage(this.driver);
+        homePage.open();
+                
+        FurniturePage furniturePage = homePage.clickFurnitureMenu();
+
+        driver.navigate().back();
+
+        Assert.assertEquals(homePage.getPageTitle(), "Shop");
+
+        driver.navigate().forward();
+
+        Assert.assertEquals(furniturePage.getPageTitle(), "Shop. Furniture");
     }
 }
