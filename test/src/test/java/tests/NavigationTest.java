@@ -6,6 +6,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.URL;
 import java.net.MalformedURLException;
 
+import pages.FurniturePage;
 import pages.HomePage;
 
 public class NavigationTest extends BaseTest {
@@ -35,4 +36,25 @@ public class NavigationTest extends BaseTest {
         Assert.assertTrue(homePage.waitForFurnitureMenuActive());
     }
 
+    @Test
+    public void clickingOnFurnitureShouldRedirectToFurniturePage() {
+        HomePage homePage = new HomePage(this.driver);
+        homePage.open();
+                
+        FurniturePage furniturePage = homePage.clickFurnitureMenu();
+        
+        Assert.assertTrue(furniturePage.getPageTitle().contains("Furniture"));
+    }
+
+    @Test
+    public void userShouldBeAbleToChangePriceFilter() {
+        HomePage homePage = new HomePage(this.driver);
+        homePage.open();
+                
+        FurniturePage furniturePage = homePage.clickFurnitureMenu();
+        
+        furniturePage.clickPriceButton();
+
+        Assert.assertTrue(furniturePage.isPriceButtonSelected());
+    }
 }

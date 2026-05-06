@@ -3,6 +3,7 @@ package pages;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -37,6 +38,10 @@ public class BasePage {
         WebElement element = waitVisibilityAndFindElement(locator);
         Actions actions = new Actions(driver);
         actions.moveToElement(element).perform();
+    }
+
+    protected void clickWithJs(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
     public String getPageTitle() {

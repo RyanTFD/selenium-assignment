@@ -60,7 +60,7 @@ public class BaseTest {
         loginPage.typeUsername(ConfigReader.get("username"))
                  .typePassword(ConfigReader.get("password"))
                  .submit();
-        return new HomePage(this.driver);
+        return new HomePage(this.driver).waitUntilLoaded();
     }
 
     @AfterMethod

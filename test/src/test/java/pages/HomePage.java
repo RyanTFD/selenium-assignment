@@ -21,6 +21,12 @@ public class HomePage extends BasePage {
     
     public void open() {
         this.driver.get(ConfigReader.get("baseUrl"));
+        waitUntilLoaded();
+    }
+
+    public HomePage waitUntilLoaded() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(welcomeLocator));
+        return this;
     }
 
     public String getWelcomeText() {
@@ -45,6 +51,11 @@ public class HomePage extends BasePage {
         waitVisibilityAndClickElement(logoutLocator);
     }
 
+    public FurniturePage clickFurnitureMenu() {
+        waitVisibilityAndClickElement(furnitureNavLocator);
+        return new FurniturePage(driver);
+    }
+
     public void hoverFurnitureMenu() {
         hover(furnitureNavLocator);
     }
@@ -56,6 +67,6 @@ public class HomePage extends BasePage {
     public HomePage logout() {
         openUserMenu();
         clickLogout();
-        return new HomePage(this.driver);
+        return new HomePage(this.driver).waitUntilLoaded();
     }
 }
