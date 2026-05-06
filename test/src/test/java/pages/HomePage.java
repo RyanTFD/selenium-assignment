@@ -13,6 +13,7 @@ public class HomePage extends BasePage {
     private final By loginLocator = By.xpath("//div[@class='dropdown']//a[contains(@href,'login')]");
     private final By customerInfoLocator = By.xpath("//div[@class='dropdown']//a[contains(@href,'/customer/info') and contains(@class, 'menubar-link')]");
     private final By logoutLocator = By.xpath("//a[contains(@href,'/logout')]");
+    private final By myAccountLocator = By.xpath("//a[contains(@href,'/customer/info') and contains(@class, 'dropdown-item')]");
     private final By furnitureNavLocator = By.xpath("//a[contains(@class, 'nav-link') and contains(@href,'/furniture')]/ancestor::li");
 
     public HomePage(WebDriver driver) {
@@ -36,7 +37,7 @@ public class HomePage extends BasePage {
     
     public LoginPage clickLogin() {
         waitVisibilityAndClickElement(loginLocator);
-        return new LoginPage(driver);
+        return new LoginPage(this.driver);
     }
     
     public boolean isUserLoggedIn() {
@@ -53,7 +54,13 @@ public class HomePage extends BasePage {
 
     public FurniturePage clickFurnitureMenu() {
         waitVisibilityAndClickElement(furnitureNavLocator);
-        return new FurniturePage(driver);
+        return new FurniturePage(this.driver);
+    }
+
+    public CustomerInfoPage openCustomerInfo() {
+        openUserMenu();
+        waitVisibilityAndClickElement(myAccountLocator);
+        return new CustomerInfoPage(this.driver);
     }
 
     public void hoverFurnitureMenu() {

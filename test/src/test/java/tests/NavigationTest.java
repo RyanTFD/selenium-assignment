@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.net.URL;
 import java.net.MalformedURLException;
 
+import pages.CustomerInfoPage;
 import pages.FurniturePage;
 import pages.HomePage;
 import utils.ConfigReader;
@@ -103,5 +104,14 @@ public class NavigationTest extends BaseTest {
 
             Assert.assertEquals(driver.getTitle(), titles[i]);
         }
+    }
+
+    @Test
+    public void clickingOnMyAccountShouldRedirectToCustomerInfoPage() {
+        HomePage loggedInHomePage = loginAsValidUser();
+        
+        CustomerInfoPage contactPage = loggedInHomePage.openCustomerInfo();
+        
+        Assert.assertEquals(contactPage.getPageTitle(), "Shop. Account");
     }
 }
