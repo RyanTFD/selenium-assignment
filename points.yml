@@ -19,7 +19,7 @@ student:
 # This has no effect on your grade.
 # ----------------------------------------------------------
 ai_usage:
-  used: false
+  used: true
   tools: "ChatGPT"           # e.g. "Claude, GitHub Copilot"
   description: "Used ChatGPT to generate class skeletons, then modified them manually."     # e.g. "Used Claude to generate initial Page Object 
                        #  classes, then modified them manually. Used Copilot 
